@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "701991563408",
+    "project_id": "chatapp-b2404",
+    "storage_bucket": "chatapp-b2404.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701991563408:android:103582a2ea0eac4a6d6815",
+        "android_client_info": {
+          "package_name": "com.abdurashidov.chatting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701991563408-7nv0oab4er89306s5i5nkalmlhd7hc1q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoacHSbUstWl4A9Q299g6i4MoYEHLD5SI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "701991563408-7nv0oab4er89306s5i5nkalmlhd7hc1q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

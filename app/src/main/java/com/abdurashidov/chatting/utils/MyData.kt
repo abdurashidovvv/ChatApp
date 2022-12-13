@@ -1,0 +1,1 @@
+package com.abdurashidov.chatting.utilsimport com.abdurashidov.chatting.models.Userobject MyData {    var user:User?=null}

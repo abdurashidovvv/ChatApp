@@ -1,0 +1,1 @@
+package com.abdurashidov.chattingobject MyData {    var phoneNumber:String?=null}

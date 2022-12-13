@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp"
+    tools:context=".ui.PhoneAuthFragment">
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:textColor="#007AFF"
+        android:textSize="17sp"
+        android:fontFamily="@font/poppinsmedium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textColor="#007AFF"
+        android:textSize="17sp"
+        android:fontFamily="@font/poppinsbold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/password"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/code_card"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/code_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintVertical_bias=".6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/edt1_card"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/edt2_card">
+            <EditText
+                android:id="@+id/edt1"
+                android:inputType="number"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:maxLength="1"
+                android:background="@drawable/card_border"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/edt2_card"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintLeft_toRightOf="@id/edt1_card"
+            app:layout_constraintRight_toLeftOf="@id/edt3_card">
+            <EditText
+                android:id="@+id/edt2"
+                android:inputType="number"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:maxLength="1"
+                android:background="@drawable/card_border"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/edt3_card"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintLeft_toRightOf="@id/edt2_card"
+            app:layout_constraintRight_toLeftOf="@id/edt4_card">
+            <EditText
+                android:id="@+id/edt3"
+                android:inputType="number"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:maxLength="1"
+                android:background="@drawable/card_border"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/edt4_card"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintLeft_toRightOf="@id/edt3_card"
+            app:layout_constraintRight_toLeftOf="@id/edt5_card">
+            <EditText
+                android:id="@+id/edt4"
+                android:inputType="number"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:maxLength="1"
+                android:background="@drawable/card_border"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/edt5_card"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintLeft_toRightOf="@id/edt4_card"
+            app:layout_constraintRight_toLeftOf="@id/edt6_card">
+            <EditText
+                android:id="@+id/edt5"
+                android:inputType="number"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:maxLength="1"
+                android:background="@drawable/card_border"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/edt6_card"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintLeft_toRightOf="@id/edt5_card"
+            app:layout_constraintRight_toRightOf="parent">
+            <EditText
+                android:id="@+id/edt6"
+                android:inputType="number"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:maxLength="1"
+                android:gravity="center"
+                android:background="@drawable/card_border"/>
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.AddInfoRegisterFragment">
+
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textColor="#007AFF"
+        android:textSize="17sp"
+        android:fontFamily="@font/poppinsbold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/password"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        android:scaleType="centerCrop"
+        app:layout_constraintVertical_bias=".2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/first_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="First name"
+        android:layout_marginTop="50dp"
+        android:padding="20dp"
+        android:background="@drawable/card_border"
+        app:layout_constraintTop_toBottomOf="@id/profile_image"/>
+
+    <EditText
+        android:id="@+id/last_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last name"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:background="@drawable/card_border"
+        app:layout_constraintTop_toBottomOf="@id/first_name"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:inputType="textPhonetic"
+        android:background="@drawable/card_border"
+        app:layout_constraintTop_toBottomOf="@id/last_name"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
