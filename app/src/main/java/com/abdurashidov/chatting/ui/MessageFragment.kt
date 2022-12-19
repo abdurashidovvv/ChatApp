@@ -1,22 +1,25 @@
 package com.abdurashidov.chatting.ui
 
+import android.R
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.abdurashidov.chatting.adapters.MessageAdapter
 import com.abdurashidov.chatting.databinding.FragmentMessageBinding
 import com.abdurashidov.chatting.models.Message
 import com.abdurashidov.chatting.utils.MyData
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.CornerFamily
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class MessageFragment : Fragment() {
 
@@ -86,7 +89,18 @@ class MessageFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+        setup()
         return binding.root
     }
 
+
+    private fun setup() {
+        val radius = 10f
+        binding.shapeableImage.shapeAppearanceModel = binding.shapeableImage.shapeAppearanceModel
+            .toBuilder()
+            .setTopRightCorner(CornerFamily.ROUNDED, radius)
+            .setBottomLeftCorner(CornerFamily.CUT, radius)
+            .build()
+    }
 }
