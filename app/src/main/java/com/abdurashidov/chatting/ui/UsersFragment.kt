@@ -52,6 +52,10 @@ class UsersFragment : Fragment(), UserAdapter.RvClick {
 
         val user=User(email, displayName, phoneNumber, photoUrl.toString(), uid)
 
+        binding.logout.setOnClickListener {
+            firebaseAuth.signOut()
+            findNavController().navigate(R.id.writePhoneFragment)
+        }
 
         myRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

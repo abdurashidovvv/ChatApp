@@ -44,9 +44,10 @@ class AddInfoRegisterFragment : Fragment() {
             val lastName = binding.lastName.text.toString()
             val userName = binding.username.text.toString()
             val imgUrl = imgUri
-            if (firstName != "" && lastName != "" && userName != "" && imgUrl != "") {
+            if (firstName != "" && lastName != "" && userName != "" && imgUrl!= "") {
                 MyData.user = User(lastName, firstName, null, imgUrl, null)
-                findNavController().navigate(R.id.usersFragment)
+                findNavController().popBackStack()
+                findNavController().navigate(R.id.homeFragment)
             } else {
                 Toast.makeText(
                     binding.root.context,

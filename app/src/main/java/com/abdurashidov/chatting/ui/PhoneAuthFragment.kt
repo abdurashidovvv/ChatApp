@@ -8,19 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.abdurashidov.chatting.MyData
 import com.abdurashidov.chatting.MyData.phoneNumber
 import com.abdurashidov.chatting.R
 import com.abdurashidov.chatting.databinding.FragmentPhoneAuthBinding
-import com.abdurashidov.chatting.models.User
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
 
 class PhoneAuthFragment : Fragment() {
@@ -33,15 +26,12 @@ class PhoneAuthFragment : Fragment() {
     var stringBuilder: StringBuilder? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentPhoneAuthBinding.inflate(layoutInflater)
 
         auth = FirebaseAuth.getInstance()
         auth.setLanguageCode("uz")
-
-
 
         sentVerificationCode(phoneNumber!!)
 
@@ -74,12 +64,9 @@ class PhoneAuthFragment : Fragment() {
 
     //send verification code
     fun sentVerificationCode(phoneNumber: String) {
-        val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber)
-            .setTimeout(60L, TimeUnit.SECONDS)
-            .setActivity(requireActivity())
-            .setCallbacks(callbacks)
-            .build()
+        val options = PhoneAuthOptions.newBuilder(auth).setPhoneNumber(phoneNumber)
+            .setTimeout(60L, TimeUnit.SECONDS).setActivity(requireActivity())
+            .setCallbacks(callbacks).build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
@@ -112,8 +99,7 @@ class PhoneAuthFragment : Fragment() {
         }
 
         override fun onCodeSent(
-            verificationId: String,
-            token: PhoneAuthProvider.ForceResendingToken
+            verificationId: String, token: PhoneAuthProvider.ForceResendingToken
         ) {
             // The SMS verification code has been sent to the provided phone number, we
             // now need to ask the user to enter the code and then construct a credential
@@ -128,33 +114,29 @@ class PhoneAuthFragment : Fragment() {
 
     //Signin with credential
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
+        auth.signInWithCredential(credential).addOnCompleteListener(requireActivity()) { task ->
+            if (task.isSuccessful) {
+                // Sign in success, update UI with the signed-in user's information
+                Log.d(TAG, "signInWithCredential:success")
 
-                    val user = task.result?.user
-                    Toast.makeText(binding.root.context, "Successful", Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, "signInWithPhoneAuthCredential: ${user!!.phoneNumber}")
-                    findNavController().navigate(R.id.addInfoRegisterFragment)
+                val user = task.result?.user
+                Toast.makeText(binding.root.context, "Successful", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "signInWithPhoneAuthCredential: ${user!!.phoneNumber}")
+                findNavController().navigate(R.id.addInfoRegisterFragment)
+            } else {
+                // Sign in failed, display a message and update the UI
+                Log.w(TAG, "signInWithCredential:failure", task.exception)
+                if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                    // The verification code entered was invalid
+                    Toast.makeText(
+                        binding.root.context, "Password is invalid", Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    // Sign in failed, display a message and update the UI
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
-                        Toast.makeText(
-                            binding.root.context,
-                            "Password is invalid",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        //true
-                        Log.d(TAG, "signInWithPhoneAuthCredential: Yeah")
-                        Toast.makeText(binding.root.context, "Correct!!!", Toast.LENGTH_SHORT)
-                            .show()
-                    }
+                    //true
+                    Log.d(TAG, "signInWithPhoneAuthCredential: Yeah")
+                    Toast.makeText(binding.root.context, "Correct!!!", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
     }
 }
