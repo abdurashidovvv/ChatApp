@@ -40,7 +40,7 @@ class SplashScreenFragment : Fragment() {
                     if (firebaseAuth.currentUser==null){
                         findNavController().navigate(R.id.writePhoneFragment)
                     }else{
-                        findNavController().navigate(R.id.usersFragment)
+                        findNavController().navigate(R.id.homeFragment)
                     }
                 }
             }
