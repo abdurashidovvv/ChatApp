@@ -30,6 +30,7 @@ class SplashScreenFragment : Fragment() {
 
         firebaseAuth=FirebaseAuth.getInstance()
 
+        findNavController().popBackStack()
         if (isOnline(binding.root.context)){
             binding.lottieAnimation.setAnimation(R.raw.chat)
             binding.lottieAnimation.playAnimation()

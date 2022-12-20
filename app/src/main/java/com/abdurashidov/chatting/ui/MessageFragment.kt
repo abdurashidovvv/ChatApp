@@ -17,6 +17,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,15 +44,16 @@ class MessageFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        val user = MyData.user
-
+        val user = MyData.user!!
+        binding.text.text=user.displayName
+        Picasso.get().load(user.photoUrl).into(binding.shapeableImage)
 
         binding.sendBtn.setOnClickListener {
 
             val m = binding.messageEt.text.toString()
             val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm")
             val date = simpleDateFormat.format(Date())
-            val message = Message(m, date, firebaseAuth.currentUser!!.uid, user!!.uid)
+            val message = Message(m, date, firebaseAuth.currentUser!!.uid, user.uid)
             val key = reference.push().key
 
             reference.child("${firebaseAuth.currentUser!!.uid}/messages/${user.uid}/$key")
@@ -63,7 +65,7 @@ class MessageFragment : Fragment() {
             binding.messageEt.text.clear()
         }
 
-        reference.child("${firebaseAuth.currentUser?.uid}/messages/${user!!.uid}")
+        reference.child("${firebaseAuth.currentUser?.uid}/messages/${user.uid}")
             .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val children = snapshot.children
@@ -75,7 +77,8 @@ class MessageFragment : Fragment() {
                         }
                     }
                     messageAdapter= MessageAdapter(list, firebaseAuth.currentUser!!.uid)
-                    binding.rv.adapter=messageAdapter//
+                    binding.rv.adapter=messageAdapter
+                    binding.rv.scrollToPosition(list.size-1)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -96,11 +99,10 @@ class MessageFragment : Fragment() {
 
 
     private fun setup() {
-        val radius = 10f
+        val radius = 20f
         binding.shapeableImage.shapeAppearanceModel = binding.shapeableImage.shapeAppearanceModel
             .toBuilder()
-            .setTopRightCorner(CornerFamily.ROUNDED, radius)
-            .setBottomLeftCorner(CornerFamily.CUT, radius)
+            .setAllCorners(CornerFamily.ROUNDED, radius)
             .build()
     }
 }

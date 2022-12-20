@@ -1,20 +1,17 @@
 package com.abdurashidov.chatting.ui
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdurashidov.chatting.R
 import com.abdurashidov.chatting.adapters.UserAdapter
 import com.abdurashidov.chatting.databinding.FragmentUsersBinding
-import com.abdurashidov.chatting.databinding.HeaderItemBinding
 import com.abdurashidov.chatting.models.User
 import com.abdurashidov.chatting.utils.MyData
 import com.google.firebase.auth.FirebaseAuth
@@ -29,7 +26,6 @@ class UsersFragment : Fragment(), UserAdapter.RvClick {
     private val TAG = "UsersFragment"
     private lateinit var userAdapter: UserAdapter
     var list=ArrayList<User>()
-    var index=0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,14 +53,11 @@ class UsersFragment : Fragment(), UserAdapter.RvClick {
         val user=User(email, displayName, phoneNumber, photoUrl.toString(), uid)
 
 
-
-        Toast.makeText(binding.root.context, "${currentUser.email}", Toast.LENGTH_SHORT).show()
-
         myRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 list.clear()
                 val filterList= arrayListOf<User>()
-                var children = snapshot.children
+                val children = snapshot.children
                 for (child in children) {
                     val value=child.getValue(User::class.java)
                     if (value != null && uid!=value.uid) {
@@ -86,6 +79,9 @@ class UsersFragment : Fragment(), UserAdapter.RvClick {
 
             }
         })
+
+        val dividerItemDecoration=DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+        binding.rv.addItemDecoration(dividerItemDecoration)
         return binding.root
     }
 
