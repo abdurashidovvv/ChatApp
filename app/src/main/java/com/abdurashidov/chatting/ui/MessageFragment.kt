@@ -1,6 +1,5 @@
 package com.abdurashidov.chatting.ui
 
-import android.R
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import com.abdurashidov.chatting.adapters.MessageAdapter
 import com.abdurashidov.chatting.databinding.FragmentMessageBinding
 import com.abdurashidov.chatting.models.Message
 import com.abdurashidov.chatting.utils.MyData
-import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -24,7 +22,7 @@ import java.util.*
 
 class MessageFragment : Fragment() {
 
-    lateinit var binding: FragmentMessageBinding
+    lateinit var binding:FragmentMessageBinding
     lateinit var firebaseAuth: FirebaseAuth
     lateinit var firebaseDatabase: FirebaseDatabase
     lateinit var reference: DatabaseReference
