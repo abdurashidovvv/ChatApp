@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
         stateAdapters = StateAdapters(list, this)
         binding.myViewpager.adapter = stateAdapters
 
+        setTab()
 
         TabLayoutMediator(binding.myTablyout, binding.myViewpager) { tab, position ->
             val tabItemView = TabItemViewBinding.inflate(layoutInflater)
@@ -61,6 +62,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
+                val customView = tab?.customView
+                customView?.findViewById<View>(R.id.selected)?.visibility = View.VISIBLE
             }
         })
 
