@@ -67,8 +67,10 @@ class GroupFragment : Fragment(), GroupAdapter.RvClick {
             override fun onDataChange(snapshot: DataSnapshot) {
                 list.clear()
                 val children = snapshot.children
+//                Log.d(TAG, "onDataChange: $children")
                 for (child in children) {
-                    val value = child.getValue(String::class.java)
+//                    Log.d(TAG, "onDataChange: $child")
+                    val value=child.getValue(String::class.java)
                     Log.d(TAG, "onDataChange: $value")
                     if (value != null) {
                         list.add(value)

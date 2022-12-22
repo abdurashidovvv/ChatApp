@@ -1,1 +1,1 @@
-package com.abdurashidov.chattingobject MyData {    var phoneNumber:String?=null}
+package com.abdurashidov.chattingimport com.abdurashidov.chatting.models.Userobject MyData {    var phoneNumber:String?=null    val list=ArrayList<User>()}

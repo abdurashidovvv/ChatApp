@@ -76,6 +76,7 @@ class UsersFragment : Fragment(), UserAdapter.RvClick {
                 }
                 userAdapter= UserAdapter(list, this@UsersFragment)
                 Log.d(TAG, "onDataChange: $list")
+                com.abdurashidov.chatting.MyData.list.addAll(listOf(user))
                 binding.rv.adapter = userAdapter
             }
 
