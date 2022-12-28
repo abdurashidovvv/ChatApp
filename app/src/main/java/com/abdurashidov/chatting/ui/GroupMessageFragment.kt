@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.abdurashidov.chatting.MyData
 import com.abdurashidov.chatting.R
+import com.abdurashidov.chatting.adapters.GroupMessageAdapter
 import com.abdurashidov.chatting.adapters.UserAdapter
 import com.abdurashidov.chatting.databinding.FragmentGroupMessageBinding
 import com.abdurashidov.chatting.models.GroupMessage
@@ -21,12 +22,14 @@ import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.log
 
 class GroupMessageFragment : Fragment() {
 
     lateinit var binding:FragmentGroupMessageBinding
     lateinit var firebaseDatabase: FirebaseDatabase
     lateinit var reference: DatabaseReference
+    lateinit var groupMessageAdapter: GroupMessageAdapter
     lateinit var auth: FirebaseAuth
     var list=ArrayList<User>()
     private  val TAG = "GroupMessageFragment"
@@ -50,7 +53,7 @@ class GroupMessageFragment : Fragment() {
             val list=MyData.list
             var message:GroupMessage?=null
             list.forEach {
-                if (it.uid== auth.currentUser!!.uid){
+                if (it.uid==auth.currentUser!!.uid){
                     val author=it.email
                     val image=it.photoUrl
                     val m=binding.messageEt.text.toString()
@@ -58,17 +61,36 @@ class GroupMessageFragment : Fragment() {
                     val uid= auth.currentUser!!.uid
                     val groupMessage=GroupMessage(author, image, m, date, uid)
                     message=groupMessage
-                    Toast.makeText(context, "$groupMessage ", Toast.LENGTH_SHORT).show()
-                }
-                if (message!=null && message?.image!=null && message?.author!=null){
-                    val key=reference.push().key
-                    reference.child("$name/$key").setValue(message)
-                }else{
-                    Log.d(TAG, "onCreateView: $message")
-                    Toast.makeText(context, "Not data found", Toast.LENGTH_SHORT).show()
                 }
             }
+            if (message!=null && message?.image!=null && message?.author!=null){
+                val key=reference.push().key
+                reference.child("$name/$key").setValue(message)
+                binding.messageEt.text.clear()
+            }else{
+//                    Log.d(TAG, "onCreateView: $message")
+                Toast.makeText(context, "Not data found", Toast.LENGTH_SHORT).show()
+            }
         }
+
+        reference.child("$name")
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val messageList=ArrayList<GroupMessage>()
+                    val children=snapshot.children
+                    for (child in children) {
+                        val value=child.getValue(GroupMessage::class.java)
+                        messageList.add(value!!)
+                    }
+                    groupMessageAdapter= GroupMessageAdapter(messageList, auth.currentUser!!.uid)
+                    binding.rv.adapter=groupMessageAdapter
+                    binding.rv.scrollToPosition(list.size-1)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    
+                }
+            })
 
         return binding.root
     }

@@ -63,7 +63,7 @@ class GroupFragment : Fragment(), GroupAdapter.RvClick {
         }
 
 
-        reference.addListenerForSingleValueEvent(object : ValueEventListener {
+        reference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 list.clear()
                 val children = snapshot.children

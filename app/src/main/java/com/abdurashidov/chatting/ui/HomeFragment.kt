@@ -68,4 +68,13 @@ class HomeFragment : Fragment() {
         })
 
     }
+    override fun onResume() {
+        super.onResume()
+        com.abdurashidov.chatting.MyData.isOnline("online")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        com.abdurashidov.chatting.MyData.isOnline("offline")
+    }
 }

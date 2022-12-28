@@ -57,7 +57,7 @@ class UsersFragment : Fragment(), UserAdapter.RvClick {
             findNavController().navigate(R.id.writePhoneFragment)
         }
 
-        myRef.addListenerForSingleValueEvent(object : ValueEventListener{
+        myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 list.clear()
                 val filterList= arrayListOf<User>()
@@ -76,7 +76,7 @@ class UsersFragment : Fragment(), UserAdapter.RvClick {
                 }
                 userAdapter= UserAdapter(list, this@UsersFragment)
                 Log.d(TAG, "onDataChange: $list")
-                com.abdurashidov.chatting.MyData.list.addAll(listOf(user))
+                com.abdurashidov.chatting.MyData.list.addAll(filterList)
                 binding.rv.adapter = userAdapter
             }
 
@@ -94,5 +94,4 @@ class UsersFragment : Fragment(), UserAdapter.RvClick {
         MyData.user=label
         findNavController().navigate(R.id.messageFragment)
     }
-
 }
